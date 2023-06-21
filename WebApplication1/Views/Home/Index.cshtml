@@ -1,8 +1,74 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<WebApplication1.Models.User>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<h1 class="text-center">CRUD - Users</h1>
+<div class="row">
+    <div class="col-12">
+           <div class="float-end">
+               <a asp-action="Create" asp-controller="Home" class="btn btn-success"><i class="fas fa-plus"></i> New user</a>
+           </div>
+    </div>
 </div>
+
+<div class="row">
+    <div class="col-12">
+           <div class="card border">
+               <div class="card-header">
+                   <h3><strong>User List</strong></h3>
+               </div>
+           </div>
+           <div class="card-body">
+               <div class="table-responsive">
+                   @if(Model.Count() > 0)
+                {
+                    <table class="table table-bordered" id="userTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(m => m.Name)</th>
+                                <th>@Html.DisplayNameFor(m => m.Phone)</th>
+                                <th>@Html.DisplayNameFor(m => m.CellPhone)</th>
+                                <th>@Html.DisplayNameFor(m => m.Email)</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach(var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(m => item.Name)</td>
+                                    <td>@Html.DisplayFor(m => item.Phone)</td>
+                                    <td>@Html.DisplayFor(m => item.CellPhone)</td>
+                                    <td>@Html.DisplayFor(m => item.Email)</td>
+                                    <td>
+                                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                        <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p>History not found</p>
+                }
+            </div>
+           </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function(){
+        //Call datatable
+        $('#userTable').DataTable({
+            
+        });
+        });
+    </script>
+}
