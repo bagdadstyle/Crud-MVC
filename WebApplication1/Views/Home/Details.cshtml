@@ -1,0 +1,29 @@
+﻿@model WebApplication1.Models.User
+
+@{
+    ViewData["Title"] = "User Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">CRUD - Users</h1>
+<hr />
+<div class="row">
+    <div class="col-12">
+        <div class="card border">
+            <div class="card-header">
+                <h3><strong>User Details</strong></h3>
+            </div>
+        </div>
+        <div class="card-body">
+            <ul class="list-group">
+                <li class="list-group-item"><strong>Name: </strong>@Html.DisplayFor(m => m.Name)</li>
+                <li class="list-group-item"><strong>Phone: </strong>@Html.DisplayFor(m => m.Phone)</li>
+                <li class="list-group-item"><strong>CellPhone: </strong>@Html.DisplayFor(m => m.CellPhone)</li>
+                <li class="list-group-item"><strong>Email: </strong>@Html.DisplayFor(m => m.Email)</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Go back</a>
+</div>
